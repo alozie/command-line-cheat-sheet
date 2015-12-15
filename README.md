@@ -17,8 +17,8 @@ a cheat sheet for common (and some uncommon) command line tasks required when ad
 
 ##Diff/Merge
 ###Merge Source Folder into Destination Folder w/o Overwriting
-These commands preserve files/directories unique to destination target. Reference:
-http://the.taoofmac.com/space/HOWTO/Merge%20Folders
+Reference: http://the.taoofmac.com/space/HOWTO/Merge%20Folders
+These commands preserve files/directories unique to destination target. 
 
 The standard UNIX way:
 ```bash
@@ -160,7 +160,8 @@ find ./*/files/. -mtime -10
 ###Inline (sed, awk, etc)
 
 ###VI
-Search and Replace - from VI command mode (:) enter:
+####Search and Replace from VI command mode (:) 
+Enter:
 ```
 %s/old-string/new-string/
 ```
@@ -168,9 +169,9 @@ e.g. User needs to go through a settings file and replace the path to physical d
 ```
 %s/drupal_core\/drupal6\/drupal-6.22/drupal-cms
 ```
-(N.B. “\” used to escape “/” characters in search and/or replace strings)
+N.B. “\” used to escape “/” characters in search and/or replace strings.
 
-Display Line Numbers - 
+####Display Line Numbers:
 ```
 set number
 ```
@@ -194,29 +195,32 @@ printenv #shows all environment variables
 ```bash
 echo $variable_name #shows the value for the given variable
 ```
+
 e.g. for PATH:
 ```bash
 echo $PATH
 ```
 
 ###Get System Info
+shows all information about the distribution currently installed
 ```bash
 lsb_release -a
 ```
-shows all information about the distribution currently installed
-
 
 ###Disk capacity
+gets amount of space used on partition where ‘sites’ folder located
 ```bash 
-df sites #gets amount of space used on partition where ‘sites’ folder located
+df sites 
 ```
 
 ###Folder Size
+human readable folder sizes and total folder size for ‘sites’ folder
 ```bash
-du -ch sites #human readable folder sizes and total folder size for ‘sites’ folder
+du -ch sites 
 ```
+human readable total size for ‘sites’ folder
 ```bash
-du -ch sites | grep total #human readable total size for ‘sites’ folder
+du -ch sites | grep total 
 ```
 
 ###Search bash command history
@@ -276,8 +280,6 @@ reference:  http://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-pa
 date | md5sum
 ```
 
-
-
 ##git Tricks
 
 ###Execute git Commands on Subfolders
@@ -291,7 +293,6 @@ this finds the subdirectories under current directory with git repositories (con
 find . -name ".git" -exec echo {} \; -execdir git pull \;
 ```
 
-
 ##SVN
 ###Checkout Specific Revision from SVN
 this checks out revision 1234 of somepath to ./working-directory
@@ -300,7 +301,9 @@ svn checkout svn://somepath@1234 working-directory
 ```
 
 ###Remove unwanted SVN directories
+```bash
 find . -type d -name '.svn' -print0 | xargs -0 rm -rdf
+```
 
 ###Adding missing files via svn status, grep, gawk, and svn update
 reference: http://www.thingy-ma-jig.co.uk/blog/11-03-2009/lazy-linux-piping
