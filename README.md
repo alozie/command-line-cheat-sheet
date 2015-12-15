@@ -2,7 +2,18 @@
 a cheat sheet for common (and some uncommon) command line tasks required when administering web applications, Drupal in particular.  References include:
 - http://www.commandlinefu.com/commands/browse
 
-
+##Contents
+1. [Diff/Merge](#diffmerge)
+1. [Find (on file system and in file)](#find-on-file-system-and-in-file)
+1. [RegEx](#regex)
+1. [Text Editing](#text-editing)
+1. [Drupal/Drush](#drupaldrush)
+1. [General Admin](#general-admin)
+1. [Backup via rsync](#backup-via-rsync)
+1. [TROUBLESHOOTING](#troubleshooting)
+1. [Random Things](#random-things)
+1. [git Tricks](#git-tricks)
+1. [SVN](#svn)
 
 ##Diff/Merge
 ###Merge Source Folder into Destination Folder w/o Overwriting
@@ -38,66 +49,95 @@ List files that only exist in the local directory:
 comm -2 -3 /tmp/filenames-local /tmp/filenames-remote
 ```
 
-###use the output of the command above, like below in order to copy the missing files
-export IFS=$'\n'
-Copy missing files from the remote to the local directory.
-tar -C <path to remote directory> -c $(comm -1 -3 /tmp/filenames-local /tmp/filenames-remote) | tar -C <path to local directory> -x
-Copy missing files from the local to the remote directory.
-tar -C <path to local directory> -c $(comm -2 -3 /tmp/filenames-local /tmp/filenames-remote) | tar -C <path to remote directory> -x
-
+###use the output of the command above to copy the missing files
 reference: http://www.no-ack.org/2010/08/merge-directories-on-unix-like-systems.html
+```bash
+export IFS=$'\n'
+```
+Copy missing files from the remote to the local directory.
+```bash
+tar -C <path to remote directory> -c $(comm -1 -3 /tmp/filenames-local /tmp/filenames-remote) | tar -C <path to local directory> -x
+```
+Copy missing files from the local to the remote directory.
+```bash
+tar -C <path to local directory> -c $(comm -2 -3 /tmp/filenames-local /tmp/filenames-remote) | tar -C <path to remote directory> -x
+```
 
 
 
 ##Find (on file system and in file)
-(see http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples/)
+reference: http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples
 
 ###largest files in directory
+```bash
 find . -type f -size +50000k -exec ls -lh {} \; | awk '{ print $8 ": " $5 }'
-
+```
+or
+```bash
 du -ks . | sort -n -r | head -n 10
-
+```
 
 ###find directory X (e.g. .svn) current folder and one level down
+```bash
 sudo find . -maxdepth 2 -type d -name '.svn'
-
+```
 
 ###count lines in file that do not contain the word ‘.svn’
-from http://www.ahinc.com/linux101/textfiles.htm
+reference: http://www.ahinc.com/linux101/textfiles.htm
+```bash
 grep -c -v .svn ~/svn-delete-it.brownsites.log
-
+```
 
 ###Find files with given content in a directory (and subdirectories)
+```bash
 grep -nrol “given content” .
+```
 
 ###Find files not containing given content in a directory
+```bash
 grep -L "given content" .
-e.g. grep -L "shib_authmap" ./*/settings.php
+```
+e.g. 
+```bash
+grep -L "shib_authmap" ./*/settings.php
+```
 
 ###Find files containing “one content string” that doesn’t contain “another content string”
+```bash
 grep -rl <string-to-match> | xargs grep -L <string-not-to-match>
-
+```
 
 ###Find files with specific name or name pattern in directory (and subdirs)
+```bash
 find . -name "*some-filename-pattern*" -print | xargs grep "some text pattern"
-
+```
 
 ###Find files of specific type with specific content and only list file names
+```bash
 find . -iname '*php' | xargs grep 'string' -sl
+```
 (finds and lists php files containing the string “string”)
 
 ###Find files with specific owner
+```bash
 find . *.* -user $USERNAME -print
+```
 
 ###Find files by specific group
+reference: http://www.cyberciti.biz/faq/how-do-i-find-all-the-files-owned-by-a-particular-user-or-group/
+```bash
 find directory-location -group {group-name} -name {file-name}
-e.g. find . -group webserv -name *.php
-
-http://www.cyberciti.biz/faq/how-do-i-find-all-the-files-owned-by-a-particular-user-or-group/
+```
+e.g. 
+```bash
+find . -group webserv -name *.php
+```
 
 ###Find and Replace in file using sed
-(http://www.cyberciti.biz/faq/unix-linux-replace-string-words-in-many-files/)
+reference: http://www.cyberciti.biz/faq/unix-linux-replace-string-words-in-many-files/
+```bash
 sed -i 's/old-word/new-word/g' *.txt
+```
 
 ###Find files in specific files, exclude certain paths, and show first occurrence of specific string in content
 sudo find . \( ! -path '*/sites/*' ! -path '*/profiles/*' ! -path '*/themes/*' ! -path '*/modules/*' \) -iname 'CHANGELOG.txt' | xargs grep -m 1 'Drupal' -s1
