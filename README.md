@@ -177,6 +177,11 @@ set number
 ```
 
 ## Drupal/Drush
+### Import DB via Drush
+```bash
+drush sql-cli < /path/to/exported-db-file.sql
+```
+More about [drush sql-cli usage](https://www.drush.org/12.x/commands/sql_cli/).
 ### Drush on MultiSite (7.x+)
 
 ### Fun With Drush
