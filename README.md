@@ -177,6 +177,25 @@ set number
 ```
 
 ## Drupal/Drush
+### DDev Usage
+#### Setup on MacOS
+##### Setup DDev
+##### Setup XDebug (w/DDev and VSCode)
+###### References:
+- [Visual Studio Code (VS Code) Debugging Setup (w/DDEV)](https://ddev.readthedocs.io/en/stable/users/debugging-profiling/step-debugging/#visual-studio-code-vs-code-debugging-setup)
+###### Setup Steps
+1. Setup XDebug on DDEV
+   1. Run `ddev xdebug`.
+1. Setup Browser's XDebug Listener
+1. Setup XDebug in VSCode
+#### Setup on Linux
+##### Setup DDev
+##### Setup XDebug (w/DDev and VSCode)
+###### References:
+- [Visual Studio Code (VS Code) Debugging Setup (w/DDEV)](https://ddev.readthedocs.io/en/stable/users/debugging-profiling/step-debugging/#visual-studio-code-vs-code-debugging-setup)
+###### Setup Steps
+1. Setup XDebug on DDEV
+   1. Run `ddev xdebug`.
 ### Import DB via Drush
 ```bash
 drush sql-cli < /path/to/exported-db-file.sql
