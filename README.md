@@ -183,6 +183,10 @@ set number
 ##### Setup XDebug (w/DDev and VSCode)
 ###### References:
 - [Visual Studio Code (VS Code) Debugging Setup (w/DDEV)](https://ddev.readthedocs.io/en/stable/users/debugging-profiling/step-debugging/#visual-studio-code-vs-code-debugging-setup)
+- [Debug PHP/Drupal with DDEV, XDebug, and VSCode](https://blog.devops.dev/debug-php-drupal-with-ddev-xdebug-and-vscode-7f40261c5864)
+- [Setting up XDebug + VSCode for use w/Drush](https://github.com/ddev/ddev/issues/2341)
+- [XDebug Step Debugging Guide](https://xdebug.org/docs/step_debug)
+- [XDebug Over Command Line w/DDev](https://mglaman.dev/blog/xdebug-over-command-line-ddev)
 ###### Setup Steps
 1. Setup XDebug on DDEV
    1. Run `ddev xdebug`.
@@ -212,6 +216,13 @@ drush php-eval 'menu_rebuild()';
 ```
 
 ### Composer
+References:
+1. [(d.o) Updating Drupal Core via Composer](https://www.drupal.org/docs/updating-drupal/updating-drupal-core-via-composer)
+2. [Composer and Version Constraints](https://getcomposer.org/doc/articles/versions.md)
+#### Install specific version of a package
+`composer require vendor/package_name:version_id --with-all-dependencies`
+#### List Available Updates for Drupal core and contrib
+`composer outdated "drupal/*"`
 #### Update Drupal Core via Command Line
 `composer update "drupal/core-*" --with-all-dependencies`
 #### Require Packages for Dev Site Installs
