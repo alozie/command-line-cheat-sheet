@@ -176,7 +176,7 @@ N.B. “\” used to escape “/” characters in search and/or replace strings.
 set number
 ```
 
-## Drupal/Drush
+## Drupal/Drush/Composer
 ### DDev Usage
 #### Setup on MacOS
 ##### Setup DDev
@@ -196,19 +196,28 @@ set number
 ###### Setup Steps
 1. Setup XDebug on DDEV
    1. Run `ddev xdebug`.
-### Import DB via Drush
+### Drush Usage
+#### Import DB via Drush
 ```bash
 drush sql-cli < /path/to/exported-db-file.sql
 ```
 More about [drush sql-cli usage](https://www.drush.org/12.x/commands/sql_cli/).
-### Drush on MultiSite (7.x+)
+#### Drush on MultiSite (7.x+)
 
-### Fun With Drush
+#### Fun With Drush
 ```bash
 drush php-eval 'node_access_rebuild()';
 drush php-eval 'drupal_rebuild_theme_registry()';
 drush php-eval 'menu_rebuild()';
 ```
+
+### Composer
+#### Update Drupal Core via Command Line
+`composer update "drupal/core-*" --with-all-dependencies`
+#### Require Packages for Dev Site Installs
+`composer require --dev drupal/devel`
+##### Install without `dev` packages
+`composer install --no-dev`
 
 ## General Admin
 ### Show Environment Variables
