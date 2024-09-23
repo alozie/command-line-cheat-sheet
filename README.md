@@ -7,7 +7,7 @@ a cheat sheet for common (and some uncommon) command line tasks required when ad
 1. [Find (on file system and in file)](#find-on-file-system-and-in-file)
 1. [RegEx](#regex)
 1. [Text Editing](#text-editing)
-1. [Drupal/Drush](#drupaldrush)
+1. [Drupal/Drush/Composer](#drupaldrushcomposer)
 1. [General Admin](#general-admin)
 1. [Backup via rsync](#backup-via-rsync)
 1. [TROUBLESHOOTING](#troubleshooting)
