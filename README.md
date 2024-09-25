@@ -64,7 +64,10 @@ tar -C <path to local directory> -c $(comm -2 -3 /tmp/filenames-local /tmp/filen
 ```
 
 ## Find (on file system and in file)
-reference: http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples
+References: 
+- http://www.thegeekstuff.com/2009/03/15-practical-linux-find-command-examples
+- https://stackoverflow.com/questions/4529134/delete-files-with-string-found-in-file-linux-cli
+- https://stackoverflow.com/a/11283391
 
 ### largest files in directory
 ```bash
@@ -90,6 +93,16 @@ grep -c -v .svn ~/svn-delete-it.brownsites.log
 ```bash
 grep -nrol “given content” .
 ```
+#### Take found files and create a batch deletion script
+- Find files containing `email@example.com`.
+   - Create `doit.sh` script that removes each of the found files.
+- Review and edit the batch remove script for any outliers.
+- Run the script.
+```bash
+find . | xargs grep -l email@example.com | awk '{print "rm "$1}' > doit.sh
+vi doit.sh // check for murphy and his law
+source doit.sh
+```
 
 ### Find files not containing given content in a directory
 ```bash
@@ -98,6 +111,10 @@ grep -L "given content" .
 e.g. 
 ```bash
 grep -L "shib_authmap" ./*/settings.php
+```
+#### Find and remove files that do not contain given content
+```bash
+find . -type f -print0 | xargs --null grep -Z -L 'my string' | xargs --null rm
 ```
 
 ### Find files containing “one content string” that doesn’t contain “another content string”
